@@ -15,6 +15,7 @@ struct Node {
 class Trie {
 private:
     vector<Node> root ;
+    int convert( char ch ) const { return ch - 'a'; }
 public:
     Trie() {
         root.push_back( Node() ) ;
@@ -22,7 +23,7 @@ public:
     void insert( string word ) {
         int node = 0 ;
         for( char& ch : word ) {
-            int idx = ch - 'a' ;
+            int idx = convert(ch) ;
             if( root[node].links[idx] == -1 ) {
                 root[node].links[idx] = root.size() ;
                 root.push_back( Node() ) ;
@@ -34,7 +35,7 @@ public:
     bool search( string word ) {
         int node = 0 ;
         for( char& ch : word ) {
-            int idx = ch - 'a' ;
+            int idx = convert(ch) ;
             if( root[node].links[idx] == -1 ) 
                 return false ;
             node = root[node].links[idx] ;
